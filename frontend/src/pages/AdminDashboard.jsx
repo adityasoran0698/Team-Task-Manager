@@ -118,7 +118,7 @@ const AdminDashboard = () => {
 
   const fetchProjects = async () => {
     const res = await axios.post(
-      "http://localhost:8000/project/all_projects",
+      "https://team-task-manager-zbjw.onrender.com/project/all_projects",
       {},
       { withCredentials: true },
     );
@@ -126,9 +126,12 @@ const AdminDashboard = () => {
   };
 
   const fetchMembers = async () => {
-    const res = await axios.get("http://localhost:8000/project/members", {
-      withCredentials: true,
-    });
+    const res = await axios.get(
+      "https://team-task-manager-zbjw.onrender.com/project/members",
+      {
+        withCredentials: true,
+      },
+    );
     return res.data.users || [];
   };
 
@@ -136,7 +139,7 @@ const AdminDashboard = () => {
   const fetchAllTasks = async (projectList) => {
     const taskPromises = projectList.map((p) =>
       axios
-        .get(`http://localhost:8000/task/all/${p._id}`, {
+        .get(`https://team-task-manager-zbjw.onrender.com/task/all/${p._id}`, {
           withCredentials: true,
         })
         .then((r) => r.data.tasks || [])
@@ -181,9 +184,13 @@ const AdminDashboard = () => {
 
   const onCreateProject = async (data) => {
     try {
-      await axios.post("http://localhost:8000/project/create", data, {
-        withCredentials: true,
-      });
+      await axios.post(
+        "https://team-task-manager-zbjw.onrender.com/project/create",
+        data,
+        {
+          withCredentials: true,
+        },
+      );
       resetP();
       setModal(null);
       const projectList = await fetchProjects();
@@ -202,8 +209,6 @@ const AdminDashboard = () => {
     reset: resetM,
     formState: { errors: errM, isSubmitting: subM },
   } = useForm();
-
-  
 
   const closeModal = () => {
     setModal(null);
@@ -632,8 +637,6 @@ const AdminDashboard = () => {
           </form>
         </Modal>
       )}
-
-     
 
       {/* ── Overdue Tasks Drawer/Modal ── */}
       {showOverdueTasks && (

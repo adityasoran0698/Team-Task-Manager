@@ -8,10 +8,13 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:8000/user/me", {
-          method: "GET",
-          credentials: "include", // send httpOnly cookie
-        });
+        const res = await fetch(
+          "https://team-task-manager-zbjw.onrender.com/user/me",
+          {
+            method: "GET",
+            credentials: "include", // send httpOnly cookie
+          },
+        );
 
         const data = await res.json();
 

@@ -117,9 +117,12 @@ const ProjectDetails = () => {
   useEffect(() => {
     const fetchRole = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/user/me", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://team-task-manager-zbjw.onrender.com/user/me",
+          {
+            withCredentials: true,
+          },
+        );
         setRole(res.data.user?.role);
       } catch (err) {
         console.log(err);
@@ -132,7 +135,7 @@ const ProjectDetails = () => {
   const fetchProject = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/project/${projectId}`,
+        `https://team-task-manager-zbjw.onrender.com/project/${projectId}`,
         { withCredentials: true },
       );
       setProject(res.data.project);
@@ -145,8 +148,8 @@ const ProjectDetails = () => {
   const fetchTasks = async () => {
     try {
       const url = isAdmin
-        ? `http://localhost:8000/task/all/${projectId}`
-        : `http://localhost:8000/task/project/${projectId}`;
+        ? `https://team-task-manager-zbjw.onrender.com/task/all/${projectId}`
+        : `https://team-task-manager-zbjw.onrender.com/task/project/${projectId}`;
       const res = await axios.get(url, { withCredentials: true });
       setTasks(res.data.tasks);
     } catch (err) {
@@ -159,9 +162,12 @@ const ProjectDetails = () => {
   // ── Fetch workspace members (admin only) ──────────────────────────────────
   const fetchMembers = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/project/all_members", {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        "https://team-task-manager-zbjw.onrender.com/project/all_members",
+        {
+          withCredentials: true,
+        },
+      );
       // console.log(res.data)
       setMembers(res.data.members || []);
     } catch (err) {
@@ -188,7 +194,7 @@ const ProjectDetails = () => {
     setUpdatingId(taskId);
     try {
       await axios.post(
-        `http://localhost:8000/task/update_status/${taskId}`,
+        `https://team-task-manager-zbjw.onrender.com/task/update_status/${taskId}`,
         { status },
         { withCredentials: true },
       );
@@ -206,9 +212,12 @@ const ProjectDetails = () => {
   const deleteTask = async (taskId) => {
     if (!window.confirm("Delete this task?")) return;
     try {
-      await axios.delete(`http://localhost:8000/task/delete/${taskId}`, {
-        withCredentials: true,
-      });
+      await axios.delete(
+        `https://team-task-manager-zbjw.onrender.com/task/delete/${taskId}`,
+        {
+          withCredentials: true,
+        },
+      );
       setTasks((prev) => prev.filter((t) => t._id !== taskId));
     } catch (err) {
       console.log(err);
@@ -225,9 +234,13 @@ const ProjectDetails = () => {
 
   const onCreateTask = async (data) => {
     try {
-      await axios.post(`http://localhost:8000/task/create/${projectId}`, data, {
-        withCredentials: true,
-      });
+      await axios.post(
+        `https://team-task-manager-zbjw.onrender.com/task/create/${projectId}`,
+        data,
+        {
+          withCredentials: true,
+        },
+      );
       resetT();
       setModal(null);
       fetchTasks();
@@ -247,7 +260,7 @@ const ProjectDetails = () => {
   const onAssignTask = async (data) => {
     try {
       await axios.post(
-        `http://localhost:8000/task/assign/${activeTask._id}/${data.memberId}`,
+        `https://team-task-manager-zbjw.onrender.com/task/assign/${activeTask._id}/${data.memberId}`,
         {},
         { withCredentials: true },
       );

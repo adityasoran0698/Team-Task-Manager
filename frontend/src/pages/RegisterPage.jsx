@@ -20,7 +20,7 @@ const RegisterPage = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/user/register",
+        "https://team-task-manager-zbjw.onrender.com/user/register",
         data,
       );
       if (response.status == 200) {

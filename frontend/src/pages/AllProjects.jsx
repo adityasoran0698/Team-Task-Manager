@@ -86,7 +86,7 @@ const AllProjects = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:8000/project/all_projects",
+        "https://team-task-manager-zbjw.onrender.com/project/all_projects",
         {},
         { withCredentials: true },
       );
@@ -113,9 +113,12 @@ const AllProjects = () => {
       return;
     setDeletingId(projectId);
     try {
-      await axios.delete(`http://localhost:8000/project/delete/${projectId}`, {
-        withCredentials: true,
-      });
+      await axios.delete(
+        `https://team-task-manager-zbjw.onrender.com/project/delete/${projectId}`,
+        {
+          withCredentials: true,
+        },
+      );
       setProjects((prev) => prev.filter((p) => p._id !== projectId));
     } catch (err) {
       console.log(err);

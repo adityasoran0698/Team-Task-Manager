@@ -10,9 +10,12 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchMe = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/user/me", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://team-task-manager-zbjw.onrender.com/user/me",
+          {
+            withCredentials: true,
+          },
+        );
         setUser(res.data.user);
       } catch (err) {
         console.log(err);
@@ -35,7 +38,7 @@ const Sidebar = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:8000/user/logout",
+        "https://team-task-manager-zbjw.onrender.com/user/logout",
         {},
         { withCredentials: true },
       );

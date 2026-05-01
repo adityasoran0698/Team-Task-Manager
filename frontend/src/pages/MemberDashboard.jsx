@@ -39,7 +39,7 @@ const MemberDashboard = () => {
     const fetchProjects = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8000/project/my_projects",
+          "https://team-task-manager-zbjw.onrender.com/project/my_projects",
           { withCredentials: true },
         );
         setProjects(res.data);

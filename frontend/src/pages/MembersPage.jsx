@@ -56,9 +56,12 @@ const MembersPage = () => {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/project/members", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://team-task-manager-zbjw.onrender.com/project/members",
+          {
+            withCredentials: true,
+          },
+        );
         setMembers(res.data.users || []);
       } catch (err) {
         setError("Failed to load members.");
@@ -74,7 +77,7 @@ const MembersPage = () => {
     const fetchProjects = async () => {
       try {
         const res = await axios.post(
-          "http://localhost:8000/project/all_projects",
+          "https://team-task-manager-zbjw.onrender.com/project/all_projects",
           {},
           { withCredentials: true },
         );
@@ -100,7 +103,7 @@ const MembersPage = () => {
     setActionLoading("remove");
     try {
       await axios.delete(
-        `http://localhost:8000/project/del_member/${removeProjectId}/${removeMemberId}`,
+        `https://team-task-manager-zbjw.onrender.com/project/del_member/${removeProjectId}/${removeMemberId}`,
         { withCredentials: true },
       );
       setMembers((prev) => prev.filter((m) => m._id !== removeMemberId));

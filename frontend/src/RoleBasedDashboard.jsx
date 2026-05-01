@@ -10,9 +10,12 @@ const RoleBasedDashboard = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/user/me", {
-          withCredentials: true, // VERY IMPORTANT for cookies
-        });
+        const res = await axios.get(
+          "https://team-task-manager-zbjw.onrender.com/user/me",
+          {
+            withCredentials: true, // VERY IMPORTANT for cookies
+          },
+        );
         setUser(res.data.user);
       } catch (err) {
         console.error(err);
