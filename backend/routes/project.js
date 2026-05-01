@@ -161,7 +161,6 @@ router.get("/:projectId", async (req, res) => {
 });
 
 // ── Delete project ────────────────────────────────────────────────────────────
-const Task = require("../models/task.js");
 
 router.delete("/delete/:projectId", async (req, res) => {
   const user = await validateToken(req.cookies.token);
