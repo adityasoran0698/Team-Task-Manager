@@ -161,7 +161,6 @@ const AdminDashboard = () => {
         const tasks = await fetchAllTasks(projectList);
         setAllTasks(tasks);
       } catch (err) {
-        console.log(err);
       } finally {
         setLoading(false);
       }
@@ -197,9 +196,7 @@ const AdminDashboard = () => {
       setProjects(projectList);
       const tasks = await fetchAllTasks(projectList);
       setAllTasks(tasks);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   // ── ADD MEMBER ────────────────────────────────────────────────────────────

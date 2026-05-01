@@ -18,6 +18,7 @@ const RegisterPage = () => {
   const [showConfirm, setShowConfirm] = useState(false);
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://team-task-manager-zbjw.onrender.com/user/register",
@@ -28,7 +29,6 @@ const RegisterPage = () => {
       }
       setLoading(true);
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }

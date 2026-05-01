@@ -15,7 +15,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://team-task-manager-zbjw.onrender.com/user/login",
@@ -32,6 +32,8 @@ const LoginPage = () => {
     } catch (error) {
       toast.error(error.response?.data.message || "Login failed!");
       reset();
+    } finally {
+      setLoading(false);
     }
   };
 

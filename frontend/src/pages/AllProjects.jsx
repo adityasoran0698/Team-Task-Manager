@@ -92,7 +92,6 @@ const AllProjects = () => {
       );
       setProjects(res.data.projects || []);
     } catch (err) {
-      console.log(err);
       setError("Failed to load projects. Make sure you're logged in as Admin.");
     } finally {
       setLoading(false);
@@ -121,7 +120,6 @@ const AllProjects = () => {
       );
       setProjects((prev) => prev.filter((p) => p._id !== projectId));
     } catch (err) {
-      console.log(err);
     } finally {
       setDeletingId(null);
     }

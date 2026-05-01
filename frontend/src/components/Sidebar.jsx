@@ -17,9 +17,7 @@ const Sidebar = () => {
           },
         );
         setUser(res.data.user);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
     fetchMe();
   }, []);

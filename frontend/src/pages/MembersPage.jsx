@@ -82,9 +82,7 @@ const MembersPage = () => {
           { withCredentials: true },
         );
         setProjects(res.data.projects || []);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
     fetchProjects();
   }, []);
@@ -113,7 +111,6 @@ const MembersPage = () => {
       setRemoveMemberName("");
       setRemoveProjectId("");
     } catch (err) {
-      console.log(err);
     } finally {
       setActionLoading(null);
     }

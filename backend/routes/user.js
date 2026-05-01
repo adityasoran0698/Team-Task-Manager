@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
     await User.create(user);
     return res.status(200).send("User registered Successfully");
   } catch (error) {
-    console.log(error); // 👈 ADD THIS
+    // 👈 ADD THIS
 
     return res.status(400).send("Registration Failed!");
   }
@@ -69,7 +69,6 @@ router.post("/login", async (req, res) => {
 
     return res.status(200).send("Login Successful");
   } catch (error) {
-    console.log(error);
     return res.status(500).send("Login Failed!");
   }
 });

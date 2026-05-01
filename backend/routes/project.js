@@ -20,7 +20,6 @@ router.post("/create", async (req, res) => {
     await Project.create(project);
     return res.status(200).json({ message: "Project Created!" });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error in creating a project" });
   }
 });
@@ -75,7 +74,6 @@ router.get("/members", async (req, res) => {
 
     return res.status(200).json({ users: members });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error in fetching members" });
   }
 });
@@ -107,7 +105,7 @@ router.delete("/del_member/:projectId/:id", async (req, res) => {
       message: "Member removed from project and tasks",
     });
   } catch (error) {
-    console.log(error);
+    error;
     return res.status(400).json({ message: "Error removing member" });
   }
 });
@@ -120,7 +118,6 @@ router.get("/all_members", async (req, res) => {
     }
     return res.status(200).json({ members });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error fetching members" });
   }
 });
@@ -139,7 +136,6 @@ router.post("/all_projects", async (req, res) => {
 
     return res.status(200).json({ projects });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error in fetching Projects" });
   }
 });
@@ -155,7 +151,6 @@ router.get("/:projectId", async (req, res) => {
     }
     return res.status(200).json({ project });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error fetching project" });
   }
 });
@@ -172,16 +167,14 @@ router.delete("/delete/:projectId", async (req, res) => {
   try {
     const { projectId } = req.params;
 
-    await Task.deleteMany({ project:projectId });
+    await Task.deleteMany({ project: projectId });
 
-   
     await Project.findByIdAndDelete(projectId);
 
     return res.status(200).json({
       message: "Project and related data deleted successfully",
     });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error deleting project" });
   }
 });

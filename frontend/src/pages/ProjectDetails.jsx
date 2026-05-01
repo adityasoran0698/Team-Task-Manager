@@ -124,9 +124,7 @@ const ProjectDetails = () => {
           },
         );
         setRole(res.data.user?.role);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     };
     fetchRole();
   }, []);
@@ -139,9 +137,7 @@ const ProjectDetails = () => {
         { withCredentials: true },
       );
       setProject(res.data.project);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   // ── Fetch tasks ───────────────────────────────────────────────────────────
@@ -153,7 +149,6 @@ const ProjectDetails = () => {
       const res = await axios.get(url, { withCredentials: true });
       setTasks(res.data.tasks);
     } catch (err) {
-      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -168,11 +163,8 @@ const ProjectDetails = () => {
           withCredentials: true,
         },
       );
-      // console.log(res.data)
       setMembers(res.data.members || []);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -202,7 +194,6 @@ const ProjectDetails = () => {
         prev.map((t) => (t._id === taskId ? { ...t, status } : t)),
       );
     } catch (err) {
-      console.log(err);
     } finally {
       setUpdatingId(null);
     }
@@ -219,9 +210,7 @@ const ProjectDetails = () => {
         },
       );
       setTasks((prev) => prev.filter((t) => t._id !== taskId));
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   // ── FORM: Create Task ─────────────────────────────────────────────────────
@@ -244,9 +233,7 @@ const ProjectDetails = () => {
       resetT();
       setModal(null);
       fetchTasks();
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   // ── FORM: Assign Task ─────────────────────────────────────────────────────
@@ -275,9 +262,7 @@ const ProjectDetails = () => {
 
       resetA();
       setModal(null);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   const closeModal = () => {
     setModal(null);

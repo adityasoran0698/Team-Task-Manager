@@ -26,7 +26,6 @@ router.post("/create/:projectId", async (req, res) => {
     await Task.create(task);
     return res.status(200).json({ message: "New Task Added!" });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error in adding a task" });
   }
 });
@@ -48,14 +47,12 @@ router.post("/assign/:taskId/:userId", async (req, res) => {
       assignee: userId,
     });
 
-    
     await Project.findByIdAndUpdate(task.project, {
       $addToSet: { members: userId },
     });
 
     return res.status(200).json({ message: "Task assigned & member added" });
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: "Error assigning task" });
   }
 });
@@ -72,7 +69,6 @@ router.post("/update_status/:taskId", async (req, res) => {
     );
     return res.status(200).json({ message: "Status Updated!", task });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error in updating tasks" });
   }
 });
@@ -84,7 +80,6 @@ router.delete("/delete/:id", async (req, res) => {
     await Task.findByIdAndDelete(id);
     return res.status(200).json({ message: "Task Deleted Successfully!" });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error in deleting task" });
   }
 });
@@ -102,9 +97,7 @@ router.get("/project/:projectId", async (req, res) => {
     }).populate("assignee", "fullname email");
 
     res.status(200).json({ tasks });
-    console.log(tasks);
   } catch (err) {
-    console.log(err);
     res.status(400).json({ message: "Error fetching tasks" });
   }
 });
@@ -125,7 +118,6 @@ router.get("/all/:projectId", async (req, res) => {
     }
     return res.status(200).json({ tasks });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ message: "Error in fetching tasks" });
   }
 });
