@@ -15,7 +15,7 @@ MongodbConnection(url);
 
 app.use(cookieParser());
 // ✅ Allow frontend to send/receive cookies
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = ["http://localhost:5173","https://team-task-manager-ivory.vercel.app"];
 
 app.use(
   cors({
