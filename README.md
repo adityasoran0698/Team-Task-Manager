@@ -80,7 +80,7 @@ TaskFlow is a lightweight Jira/Trello-style team collaboration tool where Admins
 | Backend | Node.js, Express.js |
 | Database | MongoDB, Mongoose |
 | Authentication | JSON Web Tokens (JWT), bcrypt |
-| Deployment | Railway (backend), Railway / Render (frontend) |
+| Deployment | Render (backend), Vercel (frontend) |
 
 ---
 
@@ -244,33 +244,47 @@ JWT_SECRET=your_super_secret_key
 
 ## Deployment
 
-### Backend — Railway
+### Backend — Render
 
-1. Push the `/server` folder to a GitHub repository.
-2. Create a new Railway project → **Deploy from GitHub repo**.
-3. Set the environment variables (`MONGO_URI`, `JWT_SECRET`, `PORT`) under **Variables**.
-4. Railway auto-detects Node.js and runs `npm start`.
+1. Push your repository to GitHub.
+2. Go to [render.com](https://render.com) → **New** → **Web Service**.
+3. Connect your GitHub repo and select the `/server` directory as the root.
+4. Set the following:
+   - **Build Command:** `npm install`
+   - **Start Command:** `npm start`
+   - **Environment:** `Node`
+5. Add environment variables under **Environment** tab:
 
-### Frontend — Railway / Render
+   | Key | Value |
+   |---|---|
+   | `MONGO_URI` | Your MongoDB Atlas connection string |
+   | `JWT_SECRET` | Your secret key |
+   | `PORT` | `8000` |
 
-1. Push the `/client` folder to GitHub.
-2. On Railway / Render, create a **Static Site** service.
-3. Set the build command to `npm run build` and publish directory to `dist` (Vite) or `build` (CRA).
-4. Update the Axios base URL in the frontend to point to your live backend URL.
+6. Click **Deploy** — Render will auto-deploy on every push to `main`.
 
----
+> **Important:** Since the frontend is on a different origin, make sure your Express server sets the correct `CORS` origin and cookie options:
+> ```js
+> app.use(cors({ origin: "https://your-vercel-app.vercel.app", credentials: true }));
+> res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" });
+> ```
 
-## Screenshots
+### Frontend — Vercel
 
-> _Add screenshots of Login, Admin Dashboard, Project Details, and Members page here._
+1. Go to [vercel.com](https://vercel.com) → **Add New Project**.
+2. Import your GitHub repository and set the **Root Directory** to `client`.
+3. Vercel auto-detects Vite/CRA — confirm the settings:
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist` (Vite) or `build` (CRA)
+4. Add an environment variable if you use one for the API base URL:
 
-| Page | Description |
-|---|---|
-| Login / Register | Dark-themed auth pages with validation |
-| Admin Dashboard | Stats, quick-action shortcuts, recent projects grid |
-| All Projects | Searchable project cards with member avatars |
-| Members Page | Member list with slide-in detail panel |
-| Project Details | Role-aware task board (admin actions vs member view) |
+   | Key | Value |
+   |---|---|
+   | `VITE_API_URL` | `https://your-render-app.onrender.com` |
+
+5. Update all Axios calls in the frontend to use the Render URL instead of `localhost:8000`.
+6. Click **Deploy** — Vercel redeploys automatically on every push.
+
 
 ---
 
