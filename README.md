@@ -34,9 +34,8 @@ TaskFlow is a lightweight Jira/Trello-style team collaboration tool where Admins
 
 | Resource | Link |
 |---|---|
-| Frontend | _Coming soon_ |
-| Backend API | _Coming soon_ |
-| GitHub | _Add your repo link here_ |
+| Frontend | https://team-task-manager-ivory.vercel.app/login |
+| Backend API |https://team-task-manager-zbjw.onrender.com/|
 
 ---
 
